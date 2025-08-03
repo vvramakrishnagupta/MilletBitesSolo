@@ -189,14 +189,13 @@
   <!-- Cart panel -->
   <div id="cart-panel">
     <h3>🛒 Your Cart</h3>
-    <div style="display:flex; gap:10px; margin-bottom:10px; justify-content:center;">
-      <button id="clear-cart" style="background:#b71c1c; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Clear Cart</button>
-      <button id="order-whatsapp" style="background:#25d366; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Order via WhatsApp</button>
-      <button id="close-cart" style="background:#222; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Close</button>
-    </div>
     <div id="cart-items"></div>
-    <hr>
-    <div id="cart-total"></div>
+    <div id="cart-total" style="margin:18px 0 12px 0; font-size:1.2em; font-weight:bold; color:#fff; background:#388e3c; border-radius:8px; padding:10px 0;"></div>
+    <div style="display:flex; gap:10px; margin-top:10px; justify-content:center;">
+      <button id="clear-cart" style="background:#b71c1c; color:#fff; border:none; padding:8px 18px; border-radius:6px; cursor:pointer;">Clear Cart</button>
+      <button id="order-whatsapp" style="background:#25d366; color:#fff; border:none; padding:8px 18px; border-radius:6px; cursor:pointer;">Order via WhatsApp</button>
+      <button id="close-cart" style="background:#222; color:#fff; border:none; padding:8px 18px; border-radius:6px; cursor:pointer;">Close</button>
+    </div>
   </div>
   <button id="open-cart">Show Cart</button>
 
@@ -311,7 +310,9 @@
             </table>
           `;
         }
-        document.getElementById('cart-total').innerHTML = `<span style="font-size:14px;">Total Payable: <b>₹${total}</b></span>`;
+        document.getElementById('cart-total').innerHTML = `
+          <span>Total Payable: <b style="font-size:1.3em;">₹${total}</b></span>
+        `;
 
         // Add event listeners for +/- buttons in cart
         document.querySelectorAll('.cart-minus').forEach(btn => {
