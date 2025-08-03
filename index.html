@@ -208,7 +208,7 @@
 
     // Render cart items
     function renderCart() {
-      import('./cart.js').then(({ getCart }) => {
+      import('./cart.js').then(({ getCart, addToCart }) => {
         const cart = getCart();
         const cartItemsDiv = document.getElementById('cart-items');
         cartItemsDiv.innerHTML = '';
@@ -227,15 +227,18 @@
                 </tr>
               </thead>
               <tbody>
-                ${cart.map(item => {
-                  // Calculate how many qtySteps are in the selected quantity
+                ${cart.map((item, idx) => {
                   const steps = item.quantity / item.qtyStep;
                   const itemTotal = item.price * steps;
                   total += itemTotal;
                   return `
                     <tr>
                       <td style="padding:4px;">${item.name}</td>
-                      <td style="padding:4px; text-align:right;">${item.quantity} ${item.unit}</td>
+                      <td style="padding:4px; text-align:right;">
+                        <button class="cart-minus" data-idx="${idx}" style="padding:2px 7px; margin-right:4px;">-</button>
+                        ${item.quantity} ${item.unit}
+                        <button class="cart-plus" data-idx="${idx}" style="padding:2px 7px; margin-left:4px;">+</button>
+                      </td>
                       <td style="padding:4px; text-align:right;">₹${item.price} / ${item.qtyStep}${item.unit}</td>
                       <td style="padding:4px; text-align:right;">₹${itemTotal}</td>
                     </tr>
@@ -246,6 +249,28 @@
           `;
         }
         document.getElementById('cart-total').innerHTML = `<span style="font-size:14px;">Total Payable: <b>₹${total}</b></span>`;
+
+        // Add event listeners for +/- buttons in cart
+        document.querySelectorAll('.cart-minus').forEach(btn => {
+          btn.onclick = function() {
+            const idx = parseInt(btn.getAttribute('data-idx'));
+            const item = cart[idx];
+            if (item.quantity - item.qtyStep >= item.minQty) {
+              addToCart(item, item.quantity - item.qtyStep);
+              renderCart();
+            }
+          };
+        });
+        document.querySelectorAll('.cart-plus').forEach(btn => {
+          btn.onclick = function() {
+            const idx = parseInt(btn.getAttribute('data-idx'));
+            const item = cart[idx];
+            if (item.quantity + item.qtyStep <= item.maxQty) {
+              addToCart(item, item.quantity + item.qtyStep);
+              renderCart();
+            }
+          };
+        });
       });
     }
 
