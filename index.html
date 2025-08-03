@@ -50,6 +50,37 @@
       font-size: 0.95em;
       color: #4e944f;
     }
+    /* Cart panel styles */
+    #cart-panel {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 320px;
+      background: #fff;
+      border-radius: 12px 0 0 12px;
+      box-shadow: -2px 2px 12px rgba(0,0,0,0.12);
+      padding: 20px 18px 18px 18px;
+      z-index: 100;
+      display: none;
+    }
+    #cart-panel h3 {
+      margin-top: 0;
+    }
+    #cart-total {
+      font-weight: bold;
+      color: #388e3c;
+    }
+    #open-cart {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: #388e3c;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 12px 0 0 12px;
+      z-index: 101;
+    }
   </style>
 </head>
 <body>
@@ -58,6 +89,16 @@
   <div class="products-grid" id="products-grid">
     <!-- Product cards will be rendered here by JS -->
   </div>
+
+  <!-- Cart panel -->
+  <div id="cart-panel">
+    <h3>🛒 Your Cart</h3>
+    <div id="cart-items"></div>
+    <hr>
+    <div id="cart-total"></div>
+    <button id="close-cart" style="margin-top:12px; background:#b71c1c; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Close</button>
+  </div>
+  <button id="open-cart">Show Cart</button>
 
   <script>
     // Product repository (copy from products.js)
@@ -138,9 +179,47 @@
         import('./cart.js').then(({ addToCart }) => {
           addToCart(product, selectedQty);
           document.getElementById(`selected-${idx}`).textContent = `Added to cart: ${selectedQty} ${product.unit}`;
+          renderCart();
         });
       };
     });
+
+    // Show/hide cart panel
+    const cartPanel = document.getElementById('cart-panel');
+    const openCartBtn = document.getElementById('open-cart');
+    const closeCartBtn = document.getElementById('close-cart');
+
+    openCartBtn.onclick = () => { cartPanel.style.display = 'block'; openCartBtn.style.display = 'none'; renderCart(); };
+    closeCartBtn.onclick = () => { cartPanel.style.display = 'none'; openCartBtn.style.display = 'block'; };
+
+    // Render cart items
+    function renderCart() {
+      import('./cart.js').then(({ getCart }) => {
+        const cart = getCart();
+        const cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          cartItemsDiv.innerHTML = '<p style="color:#b71c1c;">No items in cart.</p>';
+        } else {
+          cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            cartItemsDiv.innerHTML += `
+              <div style="margin-bottom:10px; text-align:left;">
+                <span style="font-weight:bold;">${item.name}</span><br>
+                Qty: ${item.quantity} ${item.unit}<br>
+                Price: ₹${item.price} x ${item.quantity} = <span style="color:#388e3c;">₹${itemTotal}</span>
+              </div>
+            `;
+          });
+        }
+        document.getElementById('cart-total').textContent = `Total Payable: ₹${total}`;
+      });
+    }
+
+    // Re-render cart after adding item
+    window.renderCart = renderCart;
   </script>
 </body>
 </html>
