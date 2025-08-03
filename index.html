@@ -223,7 +223,6 @@
           <span>${product.unit}</span>
         </div>
         <div id="selected-${idx}" style="margin-top:8px; color:#33691e; font-weight:bold;"></div>
-        <button id="addcart-${idx}" style="margin-top:10px; background:#388e3c; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Add to Cart</button>
       `;
       grid.appendChild(card);
 
@@ -233,6 +232,10 @@
           selectedQty -= product.qtyStep;
           document.getElementById(`qty-${idx}`).textContent = selectedQty;
           document.getElementById(`selected-${idx}`).textContent = `Selected: ${selectedQty} ${product.unit}`;
+          import('./cart.js').then(({ addToCart }) => {
+            addToCart(product, selectedQty);
+            renderCart();
+          });
         }
       };
       document.getElementById(`plus-${idx}`).onclick = function() {
@@ -240,16 +243,11 @@
           selectedQty += product.qtyStep;
           document.getElementById(`qty-${idx}`).textContent = selectedQty;
           document.getElementById(`selected-${idx}`).textContent = `Selected: ${selectedQty} ${product.unit}`;
+          import('./cart.js').then(({ addToCart }) => {
+            addToCart(product, selectedQty);
+            renderCart();
+          });
         }
-      };
-
-      // Add to cart button
-      document.getElementById(`addcart-${idx}`).onclick = function() {
-        import('./cart.js').then(({ addToCart }) => {
-          addToCart(product, selectedQty);
-          document.getElementById(`selected-${idx}`).textContent = `Added to cart: ${selectedQty} ${product.unit}`;
-          renderCart();
-        });
       };
     });
 
