@@ -5,11 +5,38 @@
   <title>Millet Bites - Start Page</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Calibri, Arial, sans-serif;
       background: #f1f8e9;
       color: #2e7d32;
       text-align: center;
       padding: 40px;
+    }
+    .top-menu {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 28px;
+      background: #e8f5e9;
+      padding: 14px 32px 14px 32px;
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 1.15em;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .menu-link {
+      color: #388e3c;
+      text-decoration: none;
+      padding: 4px 12px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .menu-link:hover {
+      background: #c8e6c9;
+      color: #1b5e20;
     }
     .products-grid {
       display: grid;
@@ -84,6 +111,13 @@
   </style>
 </head>
 <body>
+  <nav class="top-menu">
+    <a href="#" class="menu-link">Home</a>
+    <a href="#" class="menu-link">Menu</a>
+    <a href="#" class="menu-link">About Us</a>
+    <a href="#" class="menu-link">Contact</a>
+    <a href="#" class="menu-link">Reviews</a>
+  </nav>
   <h1>Hi!</h1>
   <p>These are my products:</p>
   <div class="products-grid" id="products-grid">
