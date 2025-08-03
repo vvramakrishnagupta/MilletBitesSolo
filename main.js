@@ -2,7 +2,7 @@ import { products } from './products.js';
 
 const grid = document.getElementById('products-grid');
 products.forEach((product, idx) => {
-  // ...product card rendering and +/- logic...
+  // ...your card rendering code here...
 });
 
 const cartPanel = document.getElementById('cart-panel');
@@ -33,3 +33,10 @@ orderWhatsappBtn.onclick = () => {
     // ...whatsapp logic...
   });
 };
+
+// CSS styles
+const style = document.createElement('style');
+style.textContent = `
+  .products-grid { display: none; }
+`;
+document.head.append(style);
