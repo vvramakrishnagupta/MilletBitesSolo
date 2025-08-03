@@ -12,3 +12,7 @@ export function addToCart(product, quantity) {
 export function getCart() {
   return cart;
 }
+
+export function clearCart() {
+  cart.length = 0;
+}
