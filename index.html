@@ -32,27 +32,50 @@
 <body>
   <h1>Hi!</h1>
   <p>These are my products:</p>
-  <div class="products-list">
+  <div class="products-list" id="products-list">
     <h3>Product List</h3>
-    <ul>
-      <li>Combo 1</li>
-      <li>Combo 2</li>
-      <li>Combo 3</li>
-      <li>Combo 4</li>
-      <li>Ragi Mixture</li>
-      <li>Ragi Chegodilu</li>
-      <li>Ragi Murukkulu</li>
-      <li>Jowar Mixture</li>
-      <li>Jowar Murukkulu</li>
-      <li>Jowar Ribbon Pakodi</li>
-      <li>Foxtail Sev</li>
-      <li>Arikalu Jantikalu</li>
-      <li>Samalu Boondi</li>
-      <li>Dry Fruit Mixture</li>
-      <li>Dry Fruit Laddu</li>
-      <li>Cashew Bar</li>
-      <li>Panchadara Gavvalu</li>
-      <li>Bellam Gavvalu</li>
-      <li>Hot Gavvalu</li>
+    <ul id="product-ul">
+      <!-- Products will be rendered here by JS -->
     </ul>
   </div>
+
+  <script>
+    // Product repository (copy from products.js)
+    const products = [
+      { name: "Combo 1", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
+      { name: "Combo 2", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
+      { name: "Combo 3", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
+      { name: "Combo 4", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
+      { name: "Cashew Bar", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
+      { name: "Dry Fruit Laddu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
+      { name: "Panchadara Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
+      { name: "Bellam Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
+      { name: "Ragi Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Ragi Chegodilu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Ragi Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Jowar Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Jowar Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Jowar Ribbon Pakodi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Foxtail Sev", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Arikalu Jantikalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Samalu Boondi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Dry Fruit Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
+      { name: "Hot Gavvalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" }
+    ];
+
+    // Render products with quantity info
+    const ul = document.getElementById('product-ul');
+    products.forEach(product => {
+      let qtyInfo = '';
+      if (product.type === 'combo') {
+        qtyInfo = `Quantity: ${product.minQty}-${product.maxQty} ${product.unit}(s)`;
+      } else {
+        qtyInfo = `Quantity: ${product.minQty}${product.unit} to ${product.maxQty}${product.unit} (step ${product.qtyStep}${product.unit})`;
+      }
+      const li = document.createElement('li');
+      li.textContent = `${product.name} — ${qtyInfo}`;
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>
