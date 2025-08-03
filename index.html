@@ -140,13 +140,14 @@
     // Render products as grid cards with images
     const grid = document.getElementById('products-grid');
     products.forEach((product, idx) => {
-      let qtyInfo = '';
+      let imgName;
       if (product.type === 'combo') {
-        qtyInfo = `Quantity: ${product.minQty}-${product.maxQty} ${product.unit}(s)`;
+        imgName = `b${idx + 1}.jpeg`;
       } else {
-        qtyInfo = `Quantity: ${product.minQty}${product.unit} to ${product.maxQty}${product.unit} (step ${product.qtyStep}${product.unit})`;
+        imgName = product.name.replace(/[^a-zA-Z0-9 ]/g, '')
+                              .replace(/ /g, '_')
+                              .toLowerCase() + '.jpeg';
       }
-      const imgName = product.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '_').toLowerCase() + '.jpeg';
       const imgSrc = `pics/${imgName}`;
       const card = document.createElement('div');
       card.className = 'product-card';
