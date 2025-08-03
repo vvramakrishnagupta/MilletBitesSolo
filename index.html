@@ -100,29 +100,8 @@
   </div>
   <button id="open-cart">Show Cart</button>
 
-  <script>
-    // Product repository (copy from products.js)
-    const products = [
-      { name: "Combo 1", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 100 },
-      { name: "Combo 2", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 200 },
-      { name: "Combo 3", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 300 },
-      { name: "Combo 4", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 400 },
-      { name: "Cashew Bar", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 50 },
-      { name: "Dry Fruit Laddu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 60 },
-      { name: "Panchadara Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 70 },
-      { name: "Bellam Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 80 },
-      { name: "Ragi Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 90 },
-      { name: "Ragi Chegodilu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 100 },
-      { name: "Ragi Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 110 },
-      { name: "Jowar Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 120 },
-      { name: "Jowar Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 130 },
-      { name: "Jowar Ribbon Pakodi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 140 },
-      { name: "Foxtail Sev", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 150 },
-      { name: "Arikalu Jantikalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 160 },
-      { name: "Samalu Boondi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 170 },
-      { name: "Dry Fruit Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 180 },
-      { name: "Hot Gavvalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 190 }
-    ];
+  <script type="module">
+    import { products } from './products.js';
 
     // Render products as grid cards with images
     const grid = document.getElementById('products-grid');
@@ -133,7 +112,6 @@
       } else {
         qtyInfo = `Quantity: ${product.minQty}${product.unit} to ${product.maxQty}${product.unit} (step ${product.qtyStep}${product.unit})`;
       }
-      // Use .jpeg extension for images
       const imgName = product.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '_').toLowerCase() + '.jpeg';
       const imgSrc = `pics/${imgName}`;
       const card = document.createElement('div');
@@ -200,21 +178,36 @@
         cartItemsDiv.innerHTML = '';
         let total = 0;
         if (cart.length === 0) {
-          cartItemsDiv.innerHTML = '<p style="color:#b71c1c;">No items in cart.</p>';
+          cartItemsDiv.innerHTML = '<p style="color:#b71c1c; font-size:13px;">No items in cart.</p>';
         } else {
-          cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
-            cartItemsDiv.innerHTML += `
-              <div style="margin-bottom:10px; text-align:left;">
-                <span style="font-weight:bold;">${item.name}</span><br>
-                Qty: ${item.quantity} ${item.unit}<br>
-                Price: ₹${item.price} x ${item.quantity} = <span style="color:#388e3c;">₹${itemTotal}</span>
-              </div>
-            `;
-          });
+          cartItemsDiv.innerHTML = `
+            <table style="width:100%; font-size:13px; border-collapse:collapse;">
+              <thead>
+                <tr style="border-bottom:1px solid #eee;">
+                  <th style="text-align:left; padding:4px;">Product</th>
+                  <th style="text-align:right; padding:4px;">Qty/Vol</th>
+                  <th style="text-align:right; padding:4px;">Unit Price</th>
+                  <th style="text-align:right; padding:4px;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${cart.map(item => {
+                  const itemTotal = item.price * item.quantity;
+                  total += itemTotal;
+                  return `
+                    <tr>
+                      <td style="padding:4px;">${item.name}</td>
+                      <td style="padding:4px; text-align:right;">${item.quantity} ${item.unit}</td>
+                      <td style="padding:4px; text-align:right;">₹${item.price}</td>
+                      <td style="padding:4px; text-align:right;">₹${itemTotal}</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          `;
         }
-        document.getElementById('cart-total').textContent = `Total Payable: ₹${total}`;
+        document.getElementById('cart-total').innerHTML = `<span style="font-size:14px;">Total Payable: <b>₹${total}</b></span>`;
       });
     }
 
