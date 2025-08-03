@@ -62,25 +62,25 @@
   <script>
     // Product repository (copy from products.js)
     const products = [
-      { name: "Combo 1", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
-      { name: "Combo 2", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
-      { name: "Combo 3", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
-      { name: "Combo 4", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack" },
-      { name: "Cashew Bar", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
-      { name: "Dry Fruit Laddu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
-      { name: "Panchadara Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
-      { name: "Bellam Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g" },
-      { name: "Ragi Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Ragi Chegodilu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Ragi Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Jowar Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Jowar Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Jowar Ribbon Pakodi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Foxtail Sev", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Arikalu Jantikalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Samalu Boondi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Dry Fruit Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" },
-      { name: "Hot Gavvalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g" }
+      { name: "Combo 1", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 100 },
+      { name: "Combo 2", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 200 },
+      { name: "Combo 3", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 300 },
+      { name: "Combo 4", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 400 },
+      { name: "Cashew Bar", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 50 },
+      { name: "Dry Fruit Laddu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 60 },
+      { name: "Panchadara Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 70 },
+      { name: "Bellam Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 80 },
+      { name: "Ragi Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 90 },
+      { name: "Ragi Chegodilu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 100 },
+      { name: "Ragi Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 110 },
+      { name: "Jowar Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 120 },
+      { name: "Jowar Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 130 },
+      { name: "Jowar Ribbon Pakodi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 140 },
+      { name: "Foxtail Sev", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 150 },
+      { name: "Arikalu Jantikalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 160 },
+      { name: "Samalu Boondi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 170 },
+      { name: "Dry Fruit Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 180 },
+      { name: "Hot Gavvalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 190 }
     ];
 
     // Render products as grid cards with images
@@ -105,6 +105,7 @@
         <img src="${imgSrc}" alt="${product.name}" onerror="this.onerror=null;this.src='pics/default.jpeg'">
         <h4>${product.name}</h4>
         <p>${qtyInfo}</p>
+        <p style="color:#b71c1c; font-weight:bold;">Price: ₹${product.price}</p>
         <div>
           <button class="qty-btn" id="minus-${idx}">-</button>
           <span id="qty-${idx}" style="margin:0 12px;">${selectedQty}</span>
@@ -112,6 +113,7 @@
           <span>${product.unit}</span>
         </div>
         <div id="selected-${idx}" style="margin-top:8px; color:#33691e; font-weight:bold;"></div>
+        <button id="addcart-${idx}" style="margin-top:10px; background:#388e3c; color:#fff; border:none; padding:6px 16px; border-radius:6px; cursor:pointer;">Add to Cart</button>
       `;
       grid.appendChild(card);
 
@@ -129,6 +131,14 @@
           document.getElementById(`qty-${idx}`).textContent = selectedQty;
           document.getElementById(`selected-${idx}`).textContent = `Selected: ${selectedQty} ${product.unit}`;
         }
+      };
+
+      // Add to cart button
+      document.getElementById(`addcart-${idx}`).onclick = function() {
+        import('./cart.js').then(({ addToCart }) => {
+          addToCart(product, selectedQty);
+          document.getElementById(`selected-${idx}`).textContent = `Added to cart: ${selectedQty} ${product.unit}`;
+        });
       };
     });
   </script>
