@@ -1,0 +1,21 @@
+export const products = [
+  { name: "Combo 1", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 100 },
+  { name: "Combo 2", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 200 },
+  { name: "Combo 3", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 300 },
+  { name: "Combo 4", type: "combo", minQty: 1, maxQty: 10, qtyStep: 1, unit: "pack", price: 400 },
+  { name: "Cashew Bar", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 50 },
+  { name: "Dry Fruit Laddu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 60 },
+  { name: "Panchadara Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 70 },
+  { name: "Bellam Gavvalu", type: "special-gram", minQty: 250, maxQty: 5000, qtyStep: 250, unit: "g", price: 80 },
+  { name: "Ragi Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 90 },
+  { name: "Ragi Chegodilu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 100 },
+  { name: "Ragi Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 110 },
+  { name: "Jowar Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 120 },
+  { name: "Jowar Murukkulu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 130 },
+  { name: "Jowar Ribbon Pakodi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 140 },
+  { name: "Foxtail Sev", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 150 },
+  { name: "Arikalu Jantikalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 160 },
+  { name: "Samalu Boondi", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 170 },
+  { name: "Dry Fruit Mixture", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 180 },
+  { name: "Hot Gavvalu", type: "gram", minQty: 100, maxQty: 3000, qtyStep: 100, unit: "g", price: 190 }
+];
