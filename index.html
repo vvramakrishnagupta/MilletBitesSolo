@@ -124,7 +124,9 @@
         <img src="${imgSrc}" alt="${product.name}" onerror="this.onerror=null;this.src='pics/default.jpeg'">
         <h4>${product.name}</h4>
         <p>${qtyInfo}</p>
-        <p style="color:#b71c1c; font-weight:bold;">Price: ₹${product.price}</p>
+        <p style="color:#b71c1c; font-weight:bold;">
+          Price: ₹${product.price} / ${product.qtyStep}${product.unit}
+        </p>
         <div>
           <button class="qty-btn" id="minus-${idx}">-</button>
           <span id="qty-${idx}" style="margin:0 12px;">${selectedQty}</span>
@@ -192,13 +194,15 @@
               </thead>
               <tbody>
                 ${cart.map(item => {
-                  const itemTotal = item.price * item.quantity;
+                  // Calculate how many qtySteps are in the selected quantity
+                  const steps = item.quantity / item.qtyStep;
+                  const itemTotal = item.price * steps;
                   total += itemTotal;
                   return `
                     <tr>
                       <td style="padding:4px;">${item.name}</td>
                       <td style="padding:4px; text-align:right;">${item.quantity} ${item.unit}</td>
-                      <td style="padding:4px; text-align:right;">₹${item.price}</td>
+                      <td style="padding:4px; text-align:right;">₹${item.price} / ${item.qtyStep}${item.unit}</td>
                       <td style="padding:4px; text-align:right;">₹${itemTotal}</td>
                     </tr>
                   `;
