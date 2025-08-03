@@ -1,0 +1,52 @@
+body {
+  font-family: 'Quicksand', 'Montserrat', Arial, sans-serif;
+  background: #f1f8e9;
+  color: #2e7d32;
+  text-align: center;
+  padding: 40px;
+}
+.top-menu { /* ...existing styles... */ }
+.menu-link { /* ...existing styles... */ }
+.products-grid { /* ...existing styles... */ }
+.product-card { /* ...existing styles... */ }
+.product-card img { /* ...existing styles... */ }
+.product-card h4 { /* ...existing styles... */ }
+.product-card p { /* ...existing styles... */ }
+#cart-panel { /* ...existing styles... */ }
+#cart-panel h3 { /* ...existing styles... */ }
+#cart-total { /* ...existing styles... */ }
+#open-cart { /* ...existing styles... */ }
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+#clear-cart {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#order-whatsapp {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#close-cart {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Responsive styles for mobile */
+@media (max-width: 600px) {
+  /* ...existing responsive styles... */
+}
