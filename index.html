@@ -85,24 +85,51 @@
 
     // Render products as grid cards with images
     const grid = document.getElementById('products-grid');
-    products.forEach(product => {
+    products.forEach((product, idx) => {
       let qtyInfo = '';
       if (product.type === 'combo') {
         qtyInfo = `Quantity: ${product.minQty}-${product.maxQty} ${product.unit}(s)`;
       } else {
         qtyInfo = `Quantity: ${product.minQty}${product.unit} to ${product.maxQty}${product.unit} (step ${product.qtyStep}${product.unit})`;
       }
-      // Image filename: replace spaces with underscores, remove special chars, lowercase
-      const imgName = product.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
+      // Use .jpeg extension for images
+      const imgName = product.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '_').toLowerCase() + '.jpeg';
       const imgSrc = `pics/${imgName}`;
       const card = document.createElement('div');
       card.className = 'product-card';
+
+      // Initial quantity
+      let selectedQty = product.minQty;
+
       card.innerHTML = `
-        <img src="${imgSrc}" alt="${product.name}" onerror="this.src='pics/default.jpg'">
+        <img src="${imgSrc}" alt="${product.name}" onerror="this.onerror=null;this.src='pics/default.jpeg'">
         <h4>${product.name}</h4>
         <p>${qtyInfo}</p>
+        <div>
+          <button class="qty-btn" id="minus-${idx}">-</button>
+          <span id="qty-${idx}" style="margin:0 12px;">${selectedQty}</span>
+          <button class="qty-btn" id="plus-${idx}">+</button>
+          <span>${product.unit}</span>
+        </div>
+        <div id="selected-${idx}" style="margin-top:8px; color:#33691e; font-weight:bold;"></div>
       `;
       grid.appendChild(card);
+
+      // Add event listeners for +/- buttons
+      document.getElementById(`minus-${idx}`).onclick = function() {
+        if (selectedQty - product.qtyStep >= product.minQty) {
+          selectedQty -= product.qtyStep;
+          document.getElementById(`qty-${idx}`).textContent = selectedQty;
+          document.getElementById(`selected-${idx}`).textContent = `Selected: ${selectedQty} ${product.unit}`;
+        }
+      };
+      document.getElementById(`plus-${idx}`).onclick = function() {
+        if (selectedQty + product.qtyStep <= product.maxQty) {
+          selectedQty += product.qtyStep;
+          document.getElementById(`qty-${idx}`).textContent = selectedQty;
+          document.getElementById(`selected-${idx}`).textContent = `Selected: ${selectedQty} ${product.unit}`;
+        }
+      };
     });
   </script>
 </body>
